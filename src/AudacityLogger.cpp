@@ -275,11 +275,22 @@ void AudacityLogger::OnClose(wxCommandEvent & WXUNUSED(e))
    OnCloseWindow(dummy);
 }
 
+
 void AudacityLogger::OnClear(wxCommandEvent & WXUNUSED(e))
 {
-   mBuffer = wxEmptyString;
-   DoLogString(wxT("Log Cleared."), 0);
+int action = wxMessageBox(_("Clear log?"),_("Warning"),wxYES_NO | wxICON_QUESTION);
+
+if(action!=wxYes)
+{
+return;
 }
+
+mBuffer = wxEmptyString;
+DoLogString(wxT("Log Cleared."), 0);
+
+}
+  
+ 
 
 void AudacityLogger::OnSave(wxCommandEvent & WXUNUSED(e))
 {
